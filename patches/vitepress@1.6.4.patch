@@ -1,0 +1,13 @@
+diff --git a/dist/client/theme-default/composables/outline.js b/dist/client/theme-default/composables/outline.js
+index 6746cc170c65ffa4f0439d2e8f8cdaa85e36e156..8e3124415d3dc5b3b46995d94eff1dcab389aae5 100644
+--- a/dist/client/theme-default/composables/outline.js
++++ b/dist/client/theme-default/composables/outline.js
+@@ -113,6 +113,8 @@ export function useActiveAnchor(container, marker) {
+         activateLink(activeLink);
+     }
+     function activateLink(hash) {
++        // A trailing scroll callback can run after the outline has unmounted.
++        if (!container.value || !marker.value) return;
+         if (prevActiveLink) {
+             prevActiveLink.classList.remove('active');
+         }

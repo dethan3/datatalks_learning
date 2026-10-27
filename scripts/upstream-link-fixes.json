@@ -1,0 +1,26 @@
+[
+  {
+    "sourcePath": "08-deep-learning/pytorch/README.md",
+    "href": "../mlzoomcamp-serverless/",
+    "target": "09-serverless/workshop/README.md",
+    "reason": "Workshop was moved into the numbered module; its README contains the ONNX and PyTorch deployment material named by this link."
+  },
+  {
+    "sourcePath": "08-deep-learning/pytorch/README.md",
+    "href": "08-deep-learning/",
+    "target": "08-deep-learning/README.md",
+    "reason": "This link explicitly names the original TensorFlow/Keras module; the relative path incorrectly repeats the module inside pytorch/."
+  },
+  {
+    "sourcePath": "10-kubernetes/workshop/README.md",
+    "href": "../mlzoomcamp-serverless/README.md#aws-lambda-pytorch-models",
+    "target": "09-serverless/workshop/README.md#aws-lambda-pytorch-models",
+    "reason": "The named AWS Lambda/PyTorch section exists in the serverless workshop README at this path."
+  },
+  {
+    "sourcePath": "10-kubernetes/workshop/README.md",
+    "href": "../mlzoomcamp-fastapi-uv/",
+    "target": "05-deployment/workshop/README.md",
+    "reason": "The FastAPI/uv workshop named by this link is the deployment module's workshop."
+  }
+]

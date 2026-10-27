@@ -1,0 +1,13 @@
+node_modules/
+docs/course/
+docs/public/course-assets/
+docs/course-manifest.json
+docs/.vitepress/.temp/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+.cache/
+output/playwright/
+.playwright-cli/
+reports/course-quality.json
+.DS_Store
+*:Zone.Identifier
