@@ -5,12 +5,13 @@
   "type": "module",
   "packageManager": "pnpm@10.23.0",
   "engines": {
-    "node": ">=20.11",
+    "node": ">=22.0.0",
     "pnpm": ">=10"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "workerd"
     ],
     "patchedDependencies": {
       "vitepress@1.6.4": "patches/vitepress@1.6.4.patch"
@@ -40,6 +41,7 @@
     "typescript": "^5.9.3",
     "vitepress": "^1.6.4",
     "vue": "^3.5.13",
-    "vue-tsc": "^3.3.13"
+    "vue-tsc": "^3.3.13",
+    "wrangler": "4.153.0"
   }
 }

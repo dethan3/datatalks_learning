@@ -17,7 +17,7 @@ To add a course to the catalog, add a typed registry entry. An external entry op
 
 ## Requirements
 
-- Node.js 20.11 or newer
+- Node.js 22 or newer (Wrangler requires Node 22; local verification uses 24.11.1)
 - pnpm 10; `package.json` pins pnpm 10.23.0
 - Git and access to github.com for course synchronization
 
@@ -152,7 +152,7 @@ References: [YouTube embed parameters](https://developers.google.com/youtube/pla
 
 ## Static deployment
 
-This is a static VitePress application. Node.js, filesystem access and Git are only needed during content import and building. The deployed output is HTML, CSS, JavaScript, search indexes and assets. No Node server, API function, database or Worker is required at runtime. Lesson completion remains in browser localStorage, separately for each origin.
+This is a static VitePress application. Node.js, filesystem access and Git are only needed during content import and building. The deployed output is HTML, CSS, JavaScript, search indexes and assets. No application server, database or custom Worker script is required. Lesson completion remains in browser localStorage, separately for each origin.
 
 | Setting | Value |
 | --- | --- |
@@ -162,14 +162,36 @@ This is a static VitePress application. Node.js, filesystem access and Git are o
 | Build existing imported revision | `pnpm build && pnpm validate:build` |
 | Build with explicit upstream refresh | `pnpm update:course` |
 | Published directory | `docs/.vitepress/dist` |
-| Node.js | A supported Node LTS, at least 20.11 |
+| Node.js | A supported Node LTS, at least 22; locally tested on 24.11.1 |
 
 Set the pnpm version to the version pinned in `package.json` if the hosting platform's default differs. On a clean cloud checkout, `pnpm build` automatically fetches the official ML course because generated content and its snapshot are ignored by Git. The build environment needs Git and access to github.com and the package registry. Do not replace the build command with bare `vitepress build`: it would skip source preparation and quality checks.
 
-The current site assumes a domain-root deployment (`/`) and uses `cleanUrls`. Confirm that the chosen host serves extensionless HTML routes. GitHub Pages project sites under `/repository-name/` need a configured `base` plus an audit of root-absolute links, and may need different URL handling; they are not verified by the current root-path build. Cloudflare Pages and Netlify are also options for publishing the static directory. No hosting-specific deployment has been configured.
+The current site assumes a domain-root deployment (`/`) and uses `cleanUrls`. Confirm that the chosen host serves extensionless HTML routes. GitHub Pages project sites under `/repository-name/` need a configured `base` plus an audit of root-absolute links, and may need different URL handling; they are not verified by the current root-path build. Cloudflare Workers Static Assets is configured below. Cloudflare Pages and Netlify are also options for publishing the static directory.
 
 Keep the generated `404.html`; do not add a catch-all rewrite of every request to `index.html`. Only files under `/assets/` have content-hashed filenames; do not apply immutable caching to all pages or course assets.
 
 To verify locally, run `pnpm build && pnpm validate:build`, then `pnpm preview`. Uploading the resulting directory or connecting a Git repository to either host is a separate deployment action; no deployment has been performed by these configuration changes.
 
 Official references: [VitePress deployment guide](https://vitepress.dev/guide/deploy), [Cloudflare Pages VitePress guide](https://developers.cloudflare.com/pages/framework-guides/deploy-a-vitepress-site/).
+
+## Cloudflare Workers Builds
+
+The Git-connected Workers creation screen can use its default deploy and preview commands:
+
+| Dashboard field | Value |
+| --- | --- |
+| Project name | `datatalks-learning` |
+| Build command | `pnpm update:course` (keep the colon) |
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler preview` |
+| Root directory | Repository root (leave the optional field empty) |
+
+Set `NODE_VERSION=24.11.1` and `PNPM_VERSION=10.23.0` in the build environment to match local verification. Wrangler is pinned as a development dependency, so `npx` uses the installed compatible version rather than resolving a different CLI for each deployment.
+
+`wrangler.jsonc` supplies the Worker name, compatibility date and `assets.directory` (`docs/.vitepress/dist`). It configures clean HTML routes, uses the generated `404.html` for missing pages, and declares an empty `previews` block to enable branch Previews. Static assets and the compatibility date stay at the top level, as required by Wrangler; there are no production data bindings or custom Worker entry point. Local Wrangler state is ignored by Git.
+
+Keep the CLI commands short; no `--assets`, `--name` or compatibility-date flags need to be copied into dashboard fields. `wrangler preview` creates a Worker Preview; `wrangler versions upload` creates a different type of version URL. The local `pnpm preview` command starts a VitePress preview server and is not the cloud Preview command.
+
+Local configuration checks can run `pnpm exec wrangler deploy --dry-run`. Creating an actual Worker Preview needs Cloudflare account access and is not verified by that dry run. Connecting the repository or pushing changes after connection can trigger builds; no CLI upload is required from this development workspace.
+
+Official references: [Workers Builds configuration](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/), [Worker Previews configuration](https://developers.cloudflare.com/workers/previews/configuration/), [Static Assets](https://developers.cloudflare.com/workers/static-assets/).
