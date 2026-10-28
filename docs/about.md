@@ -1,23 +1,32 @@
 ---
-title: About this little learning space
+title: About DataTalks Learning
+description: A connected learning home for all DataTalks.Club courses and their materials.
 sidebar: false
 outline: false
 ---
 
-# A home for your next idea.
+# One home for DataTalks.Club courses.
 
-**DataTalks Learning** brings together courses from the DataTalks.Club community. Browse a learning path, read a lesson, and build something with what you learn — at your own pace.
+**DataTalks Learning** is being built as a shared learning home for **all DataTalks.Club courses**. The goal is to connect the materials that belong together, make them easier to navigate, and help you spend more time learning.
 
-## A growing course collection
+## Connect the materials, follow the course
 
-[Machine Learning Zoomcamp](/learn/machine-learning) is available to read here, including its official modules, workshops, and project guides. Data Engineering, MLOps, and LLM courses currently link to their official resources. They will have their own reading experiences as the collection grows.
+Course materials often live across GitHub repositories, video lectures, written notes, notebooks, datasets, homework, and project instructions. This site brings reading materials and resource links into context, so you can move between a lesson and the things you need to understand and practice it.
 
-The site is not tied to a particular year or cohort. Original course content may describe a specific version, schedule, or older tool; those details stay in the source material so you can assess them yourself.
+## A home for the whole course collection
 
-## Original materials, clearly attributed
+Data engineering, machine learning, MLOps, LLMs, AI developer tools, stock market analytics, and future DataTalks.Club courses belong in the same learning space. Each course keeps its own structure and materials while sharing a familiar way to explore, read, and find the next step. The site is designed around the whole collection, across courses and cohorts.
 
-ML course pages are imported from the [official repository](https://github.com/DataTalksClub/machine-learning-zoomcamp). Each page links to the exact source revision. Pictures, code, videos, and community notes remain credited to their original authors.
+Courses are being connected gradually. Some already offer reading pages here; others currently open their official resources. The course catalog shows which experience is available.
 
-This is an **independent learning interface**, not an official DataTalks.Club platform. Registration, deadlines, homework submission, peer reviews, and certificates stay on the official course platform. Your last reading location and manual lesson completion marks are stored in this browser. The course overview shows your progress and provides JSON backup export/import for moving it to another device. There is no account or automatic cloud synchronization.
+## Make learning easier to return to
+
+For courses available to read here, you can mark lessons complete and pick up where you left off. Progress stays in your browser, with backup export and import for moving it between devices. You can follow a course at your own pace and return to its materials when you need them.
+
+## Keep the original sources in view
+
+This is an independent project for learners of DataTalks.Club courses. Original materials remain credited to their authors, and imported pages link to their official source revision. Dates, version notes, and notices in the source materials are preserved. Registration, deadlines, homework submission, peer reviews, and certificates stay with the official course platform.
+
+Suggestions, broken links, and website problems can be shared through [project Issues](https://github.com/dethan3/datatalks_learning/issues). The website's source is available in the [project repository](https://github.com/dethan3/datatalks_learning).
 
 [Explore the courses](/#courses) · [Meet DataTalks.Club](https://datatalks.club/) · [Join the community](https://datatalks.club/slack.html)

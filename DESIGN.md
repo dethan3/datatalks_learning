@@ -1,6 +1,6 @@
 # DataTalks Learning design system
 
-A welcoming, independent home for the DataTalks.Club course collection. The first local reading path is ML Zoomcamp; branding and navigation belong to the whole collection and have no cohort-year dependency.
+A welcoming, independent home for the DataTalks.Club course collection. The first course available for local reading is ML Zoomcamp; branding and navigation belong to the whole collection and have no cohort-year dependency.
 
 ## Color
 
@@ -15,15 +15,18 @@ The main surface is white `#ffffff`, with ink `#28283e`, secondary text `#626277
 
 White remains the page background. Broad course panels, the learning note and hero artwork use lavender rather than warm cream or orange. Deep violet provides readable interactive labels; decorative tints do not carry body text. Dark mode uses neutral violet-charcoal surfaces and lighter violet accents.
 
-The site logo is an open book on a pale-lavender square. Hero geometry and footer separators use an orbit/diamond motif, without a radial star emblem. The existing hero arrangement, type scale, navigation and course structure are retained.
+The site logo uses two offset, connected pages with an open-book silhouette and a small violet dot above their shared center. Lavender and pale-lavender fills sit inside a deep-violet outline, with no enclosing tile or fine page lines. Header and footer share the same symbol and wordmark: a stronger DataTalks and a lighter violet Learning. The favicon uses the symbol alone. Hero geometry retains its orbit/diamond motif. The existing hero arrangement, type scale, navigation and course structure are retained.
 
 ## Typography and layout
 
 - Display and headings: locally served Outfit Variable, weights 450–550.
 - Body and interface: locally served DM Sans Variable, with PingFang SC/Microsoft YaHei fallbacks.
+- Reading prose: 17px; course descriptions: 16px; supporting copy: 15px; controls and navigation: 14px; progress/meta text: 13px; uppercase labels: 12px. These use rem-based tokens so browser text-size preferences apply. Headline and decorative illustration proportions stay unchanged.
+- Small screens keep the same readable interface sizes; topic labels use two columns and card actions wrap instead of shrinking text.
 - Code: the VitePress monospace stack.
 - Desktop home content width: approximately 1120px; two-column course collection.
-- Mobile: one course per row, a compact hero illustration, wrapping controls and no fixed-width text.
+- Mobile: one course per row, wrapping controls and no fixed-width text.
+- On phones up to 560px, the hero uses centered text and a centered primary action. The decorative paper-card illustration and note separator are hidden so learners reach the course catalog sooner. Larger screens retain the illustrated hero.
 - Course reading: retain the familiar sidebar, search, outline and up-to-800px prose column.
 - Radius hierarchy: 4px tags, 6–7px controls, 9–12px panels; circular shapes are decorative artwork.
 

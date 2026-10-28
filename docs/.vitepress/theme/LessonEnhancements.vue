@@ -7,6 +7,7 @@ import { withBase } from 'vitepress'
 import { youtubeVideoId, youtubeEmbedUrl, youtubeWatchUrl } from '../../../src/lib/youtube.ts'
 import { useLearningProgress } from './composables/useLearningProgress.ts'
 import ProgressMeter from './components/ProgressMeter.vue'
+import BrandWordmark from './components/BrandWordmark.vue'
 
 const { frontmatter, page } = useData()
 const router = useRouter()
@@ -37,6 +38,7 @@ function completeAndContinue() {
 
 <template>
   <DefaultTheme.Layout>
+    <template #nav-bar-title-before><BrandWordmark /></template>
     <template #layout-top>
       <div v-if="progress.storageError.value" class="progress-storage-warning" role="status">
         <span>{{ progress.storageError.value }}</span><button @click="progress.exportBackup">Export session progress</button>

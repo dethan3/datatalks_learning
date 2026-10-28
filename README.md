@@ -1,6 +1,6 @@
 # DataTalks Learning
 
-An independent learning hub for the [DataTalks.Club](https://datatalks.club/) course community. The site is organized around learning paths rather than a particular year or one course. Machine Learning Zoomcamp is currently available for local reading; Data Engineering, MLOps, and LLM Zoomcamp link to their official resources.
+An independent learning hub for the [DataTalks.Club](https://datatalks.club/) course community. The catalog covers all six courses listed in the [official course guide](https://datatalks.club/blog/guide-to-free-online-courses-at-datatalks-club.html). Machine Learning Zoomcamp is currently available for local reading; Data Engineering, MLOps, LLM, AI Dev Tools, and Analytics in Stock Markets Zoomcamp link to their official repositories. On-site readers for these five courses are not yet available.
 
 ## Course configuration and TypeScript
 
@@ -138,7 +138,7 @@ These are offline structural/rendering checks. Remote HTTP availability, YouTube
 
 ## Visual design
 
-The site uses a white background with broad pale-lavender surfaces inspired by the DataTalks.Club reference, deep violet interactive accents and subtle blue/yellow details. Outfit and DM Sans variable fonts are served locally from the build, with system fallbacks for scripts they do not cover. Light/dark themes, keyboard focus indicators and a reduced-motion preference are supported. The course catalog filters between all paths, local reading and official external resources.
+The site uses a white background with broad pale-lavender surfaces inspired by the DataTalks.Club reference, deep violet interactive accents and subtle blue/yellow details. Outfit and DM Sans variable fonts are served locally from the build, with system fallbacks for scripts they do not cover. Light/dark themes, keyboard focus indicators and a reduced-motion preference are supported. The course catalog filters between all courses, local reading and official external resources.
 
 Branding and top-level links are not tied to a cohort year. Dates and version notes inside official source materials are preserved as course content. This interface is independent of DataTalks.Club; its official registration, grading and community tools remain linked externally.
 

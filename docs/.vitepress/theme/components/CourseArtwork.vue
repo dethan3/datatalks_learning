@@ -25,6 +25,19 @@ defineProps<{ kind: string }>()
       <path d="m68 69 7 7 13-15" class="art-ink" />
       <circle cx="127" cy="118" r="8" class="art-accent" />
     </template>
+    <template v-else-if="kind === 'ai-dev-tools'">
+      <rect x="18" y="24" width="119" height="88" rx="8" class="art-fill" />
+      <path d="M18 44h119M31 34h1M42 34h1M53 34h1M53 62 39 75l14 13M100 62l14 13-14 13M84 58 70 93" class="art-ink" />
+      <circle cx="128" cy="111" r="17" class="art-accent" />
+      <path d="m120 111 6 6 11-13" class="art-ink" />
+    </template>
+    <template v-else-if="kind === 'stock-markets-analytics'">
+      <path d="M24 23v92h119M47 54v44M79 28v52M111 44v57" class="art-ink" />
+      <rect x="39" y="65" width="16" height="22" rx="3" class="art-fill" />
+      <rect x="71" y="38" width="16" height="29" rx="3" class="art-fill" />
+      <rect x="103" y="58" width="16" height="30" rx="3" class="art-accent" />
+      <path d="m39 127 32-17 32 9 28-18" class="art-ink art-draw" stroke-dasharray="5 6" />
+    </template>
     <template v-else>
       <path d="M29 35h85a10 10 0 0 1 10 10v41a10 10 0 0 1-10 10H69l-22 18V96H29a10 10 0 0 1-10-10V45a10 10 0 0 1 10-10Z" class="art-fill" />
       <path d="M38 56h65M38 70h45M38 84h27" class="art-ink" />

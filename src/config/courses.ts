@@ -24,6 +24,8 @@ export const site = {
   officialUrl: 'https://datatalks.club/',
   communityUrl: 'https://datatalks.club/slack.html',
   organizationUrl: 'https://github.com/DataTalksClub',
+  repositoryUrl: 'https://github.com/dethan3/datatalks_learning',
+  issuesUrl: 'https://github.com/dethan3/datatalks_learning/issues',
 } as const
 export const courses: readonly LearningCourse[] = [
   {
@@ -55,6 +57,20 @@ export const courses: readonly LearningCourse[] = [
     description: 'Build applications that work with language. Connect models to your knowledge, then evaluate what they give back.',
     tags: ['RAG', 'Retrieval', 'Evaluation'],
     repository: 'https://github.com/DataTalksClub/llm-zoomcamp',
+  },
+  {
+    id: 'ai-dev-tools', title: 'AI Dev Tools Zoomcamp', shortTitle: 'AI Dev Tools',
+    category: 'SOFTWARE & AI TOOLS', tone: 'blue', mode: 'external',
+    description: 'Build software with AI assistance. Work with coding agents, connect tools through MCP, and practice testing and review.',
+    tags: ['Coding agents', 'MCP', 'Testing'],
+    repository: 'https://github.com/DataTalksClub/ai-dev-tools-zoomcamp',
+  },
+  {
+    id: 'stock-markets-analytics', title: 'Analytics in Stock Markets Zoomcamp', shortTitle: 'Stock Market Analytics',
+    category: 'DATA & MARKET ANALYSIS', tone: 'lavender', mode: 'external',
+    description: 'Explore financial datasets with Python. Clean and visualize market data, build predictive models, and test ideas through trading simulations.',
+    tags: ['Python', 'Pandas', 'Time series'],
+    repository: 'https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp',
   },
 ]
 export function courseForPath(relativePath: string): LocalCourse | undefined {

@@ -19,8 +19,8 @@ const modules = computed(() => entry.value?.modules.map((module) => ({ ...module
 
 <template>
   <div class="course-overview">
-    <a class="back-link" :href="withBase('/#courses')">← All learning paths</a>
-    <section class="course-intro tone-lavender"><div><div class="eyebrow">YOUR LEARNING PATH / MACHINE LEARNING</div><h1>Machine Learning<br><span>Zoomcamp.</span></h1><p>{{ machineLearning.description }}</p><div class="overview-stats" v-if="entry?.stats"><span>{{ entry.stats.modules }} modules</span><span>{{ entry.stats.lessons }} lessons</span><span>{{ entry.stats.guides }} extra guides</span></div><div class="hero-actions"><a class="button button-primary" :href="withBase(startRoute)">{{ startLabel }} <span>→</span></a><a class="hero-secondary" :href="machineLearning.repository" target="_blank" rel="noreferrer">Official repository ↗</a></div></div><CourseArtwork kind="machine-learning" /></section>
+    <a class="back-link" :href="withBase('/#courses')">← All courses</a>
+    <section class="course-intro tone-lavender"><div><div class="eyebrow">COURSE / MACHINE LEARNING</div><h1>Machine Learning<br><span>Zoomcamp.</span></h1><p>{{ machineLearning.description }}</p><div class="overview-stats" v-if="entry?.stats"><span>{{ entry.stats.modules }} modules</span><span>{{ entry.stats.lessons }} lessons</span><span>{{ entry.stats.guides }} extra guides</span></div><div class="hero-actions"><a class="button button-primary" :href="withBase(startRoute)">{{ startLabel }} <span>→</span></a><a class="hero-secondary" :href="machineLearning.repository" target="_blank" rel="noreferrer">Official repository ↗</a></div></div><CourseArtwork kind="machine-learning" /></section>
     <section class="course-progress-panel" aria-labelledby="your-progress-heading">
       <div class="eyebrow">YOUR PROGRESS</div>
       <h2 id="your-progress-heading">{{ summary.finished ? 'Every lesson, completed.' : summary.started ? 'Keep your curiosity going.' : 'Your next small step starts here.' }}</h2>

@@ -26,7 +26,7 @@ export default defineConfig({
   ignoreDeadLinks: [(url) => localExamples.has(url)],
   markdown: { math: true, config: courseMarkdownPlugin(manifest) },
   themeConfig: {
-    logo: '/favicon.svg', siteTitle: site.name,
+    siteTitle: false,
     nav: [
       { text: 'Explore courses', link: '/#courses', activeMatch: '^/learn/' },
       { text: 'About', link: '/about' },
@@ -34,7 +34,7 @@ export default defineConfig({
     ],
     sidebar: {
       '/course/': [
-        { text: '← All learning paths', link: '/#courses' },
+        { text: '← All courses', link: '/#courses' },
         { text: machineLearning.title, link: machineLearning.overview },
         ...courseItems,
       ],
