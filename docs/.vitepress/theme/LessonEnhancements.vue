@@ -8,6 +8,8 @@ import { youtubeVideoId, youtubeEmbedUrl, youtubeWatchUrl } from '../../../src/l
 import { useLearningProgress } from './composables/useLearningProgress.ts'
 import ProgressMeter from './components/ProgressMeter.vue'
 import BrandWordmark from './components/BrandWordmark.vue'
+import { useLessonFocus } from './composables/useLessonFocus.ts'
+import LessonLayoutSwitch from './components/LessonLayoutSwitch.vue'
 
 const { frontmatter, page } = useData()
 const router = useRouter()
@@ -17,8 +19,10 @@ const lessonPath = computed(() => page.value.relativePath.replace(/\.md$/, ''))
 const isLesson = computed(() => frontmatter.value.reader?.kind === 'lesson')
 const videoUrl = computed(() => typeof frontmatter.value.video_url === 'string' ? frontmatter.value.video_url : '')
 const videoId = computed(() => youtubeVideoId(videoUrl.value))
-const embedUrl = computed(() => videoId.value ? youtubeEmbedUrl(videoId.value) : '')
-const watchUrl = computed(() => videoId.value ? youtubeWatchUrl(videoId.value) : videoUrl.value)
+const embedUrl = computed(() => videoId.value ? youtubeEmbedUrl(videoUrl.value) : '')
+const watchUrl = computed(() => videoId.value ? youtubeWatchUrl(videoUrl.value) : videoUrl.value)
+const focus = useLessonFocus(lessonPath, computed(() => isLesson.value && !!videoId.value))
+const { playerSlot, trigger: focusTrigger, pageTop: focusPageTop } = focus
 const isDone = computed(() => currentCourse.value ? progress.isComplete(currentCourse.value.id, lessonPath.value) : false)
 const courseProgress = computed(() => currentCourse.value ? progress.summary(currentCourse.value.id) : null)
 
@@ -40,11 +44,31 @@ function completeAndContinue() {
   <DefaultTheme.Layout>
     <template #nav-bar-title-before><BrandWordmark /></template>
     <template #layout-top>
+      <div v-if="focus.active.value" class="lesson-focus-controls">
+        <button class="focus-drawer-handle focus-drawer-handle--course" data-focus-drawer="course" :aria-expanded="focus.drawer.value === 'course'" aria-controls="VPSidebarNav" :aria-label="focus.drawer.value === 'course' ? 'Close course directory' : 'Open course directory'" title="Course directory" @click="focus.toggleDrawer('course')">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16m4-11h4m-4 6h4"/></svg>
+        </button>
+        <button class="focus-drawer-handle focus-drawer-handle--outline" data-focus-drawer="outline" :aria-expanded="focus.drawer.value === 'outline'" :aria-label="focus.drawer.value === 'outline' ? 'Close page outline' : 'Open page outline'" title="On this page" @click="focus.toggleDrawer('outline')">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M15 4v16M7 9h4m-4 6h4"/></svg>
+        </button>
+        <button v-if="focus.drawer.value" class="focus-drawer-backdrop" tabindex="-1" aria-label="Close directory" @click="focus.closeDrawer()"></button>
+      </div>
       <div v-if="progress.storageError.value" class="progress-storage-warning" role="status">
         <span>{{ progress.storageError.value }}</span><button @click="progress.exportBackup">Export session progress</button>
       </div>
     </template>
+    <template #sidebar-nav-before>
+      <div v-if="focus.drawer.value === 'course'" class="focus-drawer-heading"><span>Course directory</span><button aria-label="Close course directory" @click="focus.closeDrawer()">×</button></div>
+      <div v-if="focus.available.value" class="sidebar-layout-preference">
+        <span>READING LAYOUT</span>
+        <LessonLayoutSwitch :pinned="focus.pinned.value" @change="focus.setLayout" />
+      </div>
+    </template>
+    <template #aside-top>
+      <div v-if="focus.drawer.value === 'outline'" class="focus-drawer-heading"><span>On this page</span><button aria-label="Close page outline" @click="focus.closeDrawer()">×</button></div>
+    </template>
     <template #doc-before>
+      <div v-if="isLesson" ref="focusPageTop" class="focus-sentinel" aria-hidden="true"></div>
       <a v-if="currentCourse" class="reader-back" :href="withBase(currentCourse.overview)">← {{ currentCourse.title }}</a>
       <section v-if="isLesson" class="lesson-tools">
         <div class="lesson-tools__meta">
@@ -58,24 +82,30 @@ function completeAndContinue() {
           <ProgressMeter :completed="courseProgress.completed" :total="courseProgress.total" />
           <a v-if="currentCourse" :href="withBase(currentCourse.overview)">View learning progress →</a>
         </div>
-        <div v-if="videoId" class="lesson-video">
-          <iframe
-            :key="embedUrl"
-            :src="embedUrl"
-            :title="`Official ${currentCourse?.title ?? 'course'} lecture`"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          />
-        </div>
-        <div v-if="videoId" class="video-actions">
-          <a :href="watchUrl" target="_blank" rel="noreferrer">Watch on YouTube ↗</a>
+        <div v-if="videoId" ref="playerSlot" class="lesson-player-slot" :style="focus.active.value && focus.reservedHeight.value ? { height: `${focus.reservedHeight.value}px` } : undefined">
+          <div class="lesson-player">
+            <div class="lesson-video">
+              <iframe
+                :key="embedUrl"
+                :src="embedUrl"
+                :title="`Official ${currentCourse?.title ?? 'course'} lecture`"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              />
+            </div>
+            <div class="video-actions">
+              <a :href="watchUrl" target="_blank" rel="noreferrer">Watch on YouTube ↗</a>
+              <LessonLayoutSwitch v-if="focus.available.value" :pinned="focus.pinned.value" @change="focus.setLayout" />
+            </div>
+          </div>
         </div>
         <p v-else-if="videoUrl" class="video-fallback">
           <a :href="videoUrl" target="_blank" rel="noreferrer">Watch the official lecture on YouTube ↗</a>
         </p>
       </section>
+      <div v-if="isLesson && videoId" ref="focusTrigger" class="focus-sentinel" aria-hidden="true"></div>
     </template>
     <template #doc-after>
       <section v-if="isLesson" class="lesson-footer-note">

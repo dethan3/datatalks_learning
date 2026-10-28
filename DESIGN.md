@@ -32,6 +32,10 @@ The site logo uses two offset, connected pages with an open-book silhouette and 
 
 ## Motion and accessibility
 
+In split view, the video frame is centered below the main navigation, then the whole player group is raised by 5% of that available height to balance the source link and layout switch underneath. CSS grid and a single transform handle placement without scroll or resize measurements.
+
+Desktop video lessons offer a watch-and-read focus view at widths of 1200px or more and heights of 650px or more. Scrolling into the lesson slides both directories outward over 260ms and fixes the existing player on the left, with a readable text column on the right. There is no top toolbar: small edge buttons open course and outline drawers over the existing layout. Closing a drawer preserves the split view. The reading column stays at most 800px wide, with a separate 64–112px right margin. The player uses 90% of its available width (also bounded by the available height), leaving more space between video and text. A compact Side by side / Pin directories switch appears below the player and at the top of the course directory. Pinning prevents automatic entry across lessons and reloads; switching back enables split view immediately. The preference is browser-local. Escape outside a drawer or returning to the top restores the normal layout for that visit. Drawer dialogs retain keyboard focus and restore it to their edge button when closed. Manually exiting suppresses automatic entry until a new lesson is opened. Hidden directories are inert, small windows retain the standard layout, and reduced-motion settings disable the slide. The iframe remains mounted throughout.
+
 The hero's paper cards gently drift. Course cards and links move slightly on hover; category filtering is immediate. Motion respects `prefers-reduced-motion`. Keyboard focus uses a visible blue outline. Course filters expose `aria-pressed` and course availability is written in text as well as encoded by color.
 
 ## Content rules
